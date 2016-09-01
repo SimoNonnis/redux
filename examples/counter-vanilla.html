@@ -20,7 +20,7 @@
 
     <script>
 
-      function counter(state, action) {
+      function counterReducer(state, action) {
         if (typeof state === 'undefined') {
           return 0
         }
@@ -35,7 +35,7 @@
             return state
         }
       }
-      var store = Redux.createStore(counter)
+      var store = Redux.createStore(counterReducer)
       var valueEl = document.getElementById('value')
 
 
@@ -47,6 +47,7 @@
 
       store.subscribe(render)
 
+      
       document.getElementById('increment')
         .addEventListener('click', function () {
           store.dispatch({ type: 'INCREMENT' })
