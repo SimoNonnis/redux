@@ -18,5 +18,6 @@
 - Pass the result of the action creator to dispatch() function
 
 ## Reducers
+
 - You need reducers to specify how the state updates when you dispatch actions
-- 
+- Actions describe what happened, but don’t specify how the application’s state changes in response. This is the job of a reducer.
