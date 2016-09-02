@@ -15,3 +15,8 @@
 ### Action Creators
 - Functions that return actions
 - Action creators can also be asynchronous and have side-effects. *Redux Thunk middleware* is the standard way to manage async control flow with redux
+- Pass the result of the action creator to dispatch() function
+
+## Reducers
+- You need reducers to specify how the state updates when you dispatch actions
+- 
