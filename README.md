@@ -40,6 +40,13 @@
 
 ## Store
 - Holds the state and takes care of calling your reducer when you dispatch an action
+- Is the object that brings together actions and reducers
+- Holds application state and allow access to it via getState()
+- Allows state to be updated via dispatch(action)
+- Registers listeners via subscribe(listener)
+
+## Data Flow
+- 
 
 
 
