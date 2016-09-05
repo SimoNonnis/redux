@@ -53,6 +53,23 @@
   4. The Redux store saves the complete state tree returned by the root reducer. This new tree is now the next state of your app! Every listener registered with store.subscribe(listener) will now be invoked; listeners may call store.getState() to get the current state.
 
 ## Usage with React
+- You need react-redux that provides <Provider store/>, connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
+
+### Presentational and Container Components
+- React bindings for Redux embrace the idea of separating presentational and container components
+- If you migrate from Redux to something else, you'll be able to keep presentational components exactly the same. They have no dependency on Redux
+- You write presentational components and react-redux will generate the container components using *connect()*
+- We will need some container components to connect the presentational components to Redux
+- Sometimes it's hard to tell if some component should be a presentational component or a container
+- It's fine to mix presentation and logic in a component that is very small. As it grows, it will be more obvious how to split it
+
+### Passing the Store
+- All container components need access to the Redux store so they can subscribe to it. One option would be to pass it as a prop to every container component. However it gets tedious, as you have to wire store even through presentational components just because they happen to render a container deep in the component tree
+- The option is to use a special React Redux component called <Provider> to make the store available to all container components in the application without passing it explicitly
+- You only need to use it once when you render the root component
+
+
+
 
 
 
