@@ -46,7 +46,7 @@
 - Registers listeners via subscribe(listener)
 
 ## Data Flow
-Redux architecture revolves around a strict unidirectional data flow
+Redux architecture revolves around a strict unidirectional data flow:
   1.  You call *store.dispatch(action)* Think of an action as a very brief snippet of news. “Mary liked article 42.” or “‘Read the Redux docs.’ was added to the list of todos.”
   2.  The Redux store calls the reducer function you gave it. The store will pass two arguments to the reducer: the current state tree and the action
   3.  The root reducer may combine the output of multiple reducers into a single state tree. Redux ships with a *combineReducers()* helper function, useful for “splitting” the root reducer into separate functions that each manage one branch of the state tree
