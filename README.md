@@ -91,6 +91,26 @@ Each of these two moments usually require a change in the application state; to 
 - You may enhance createStore() with applyMiddleware()
 - When the last middleware in the chain dispatches an action, it has to be a plain object. This is when the synchronous Redux data flow takes place.
 
+## Usage with React Router
+- So you want to do routing with your Redux app. You can use it with React Router. Redux will be the source of truth for your data and React Router will be the source of truth for your URL
+
+## Using Object Spread Operator
+- Since one of the core tenets of Redux is to never mutate state, you'll often find yourself using Object.assign() to create copies of objects with new or updated values
+- While effective, using Object.assign() can quickly make simple reducers difficult to read given its rather verbose syntax
+- An alternative approach is to use the object spread syntax proposed for the next versions of JavaScript which lets you use the spread (...) operator to copy enumerable properties from one object to another in a more succinct way. The object spread operator is conceptually similar to the ES6 array spread operator
+- You can use your existing es2015 preset, install babel-plugin-transform-object-rest-spread and add it individually to the plugins array in your .babelrc
+
+## Reducing Boilerplate
+- Redux is in part inspired by Flux, and the most common complaint about Flux is how it makes you write a lot of boilerplate
+- Redux lets us choose how verbose we'd like our code to be, depending on personal style, team preferences, longer term maintainability, and so on
+- You can define action type as a string constant *const ADD_TODO = 'ADD_TODO'*
+- Why is this beneficial? It is often claimed that constants are unnecessary, and for small projects, this might be correct. For larger projects, there are some benefits to defining action types as constants:
+  - It helps keep the naming consistent because all action types are gathered in a single place
+  - Sometimes you want to see all existing actions before working on a new feature. It may be that the action you need was already added by somebody on the team, but you didn't know
+  - The list of action types that were added, removed, and changed in a Pull Request helps everyone on the team keep track of scope and implementation of new features
+  - If you make a typo when importing an action constant, you will get undefined. Redux will immediately throw when dispatching such an action, and you'll find the mistake sooner
+- It is up to you to choose the conventions for your project. You may start by using inline strings, and later transition to constants, and maybe later group them into a single file. Redux does not have any opinion here, so use your best judgment
+
 
 
 
