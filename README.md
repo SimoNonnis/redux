@@ -87,7 +87,9 @@ Each of these two moments usually require a change in the application state; to 
 - Do this once before any other code in your app *import 'babel-polyfill'*
 
 ### Async Flow
-- 
+- Without middleware, Redux store only supports synchronous data flow. This is what you get by default with createStore()
+- You may enhance createStore() with applyMiddleware()
+- When the last middleware in the chain dispatches an action, it has to be a plain object. This is when the synchronous Redux data flow takes place.
 
 
 
