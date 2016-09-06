@@ -110,6 +110,9 @@ Each of these two moments usually require a change in the application state; to 
   - The list of action types that were added, removed, and changed in a Pull Request helps everyone on the team keep track of scope and implementation of new features
   - If you make a typo when importing an action constant, you will get undefined. Redux will immediately throw when dispatching such an action, and you'll find the mistake sooner
 - It is up to you to choose the conventions for your project. You may start by using inline strings, and later transition to constants, and maybe later group them into a single file. Redux does not have any opinion here, so use your best judgment
+- We don't have to worry about looking at each place where todos are being added, to make sure they have this check. Action creators let you decouple additional logic around dispatching an action, from the actual components emitting those actions. It's very handy when the application is under heavy development, and the requirements change often
+
+
 
 
 
