@@ -46,11 +46,11 @@
 - Registers listeners via subscribe(listener)
 
 ## Data Flow
-- Redux architecture revolves around a strict unidirectional data flow
-  1. You call *store.dispatch(action)* Think of an action as a very brief snippet of news. “Mary liked article 42.” or “‘Read the Redux docs.’ was added to the list of todos.”
-  2. The Redux store calls the reducer function you gave it. The store will pass two arguments to the reducer: the current state tree and the action
-  3. The root reducer may combine the output of multiple reducers into a single state tree. Redux ships with a *combineReducers()* helper function, useful for “splitting” the root reducer into separate functions that each manage one branch of the state tree
-  4. The Redux store saves the complete state tree returned by the root reducer. This new tree is now the next state of your app! Every listener registered with store.subscribe(listener) will now be invoked; listeners may call store.getState() to get the current state.
+Redux architecture revolves around a strict unidirectional data flow
+  1.  You call *store.dispatch(action)* Think of an action as a very brief snippet of news. “Mary liked article 42.” or “‘Read the Redux docs.’ was added to the list of todos.”
+  2.  The Redux store calls the reducer function you gave it. The store will pass two arguments to the reducer: the current state tree and the action
+  3.  The root reducer may combine the output of multiple reducers into a single state tree. Redux ships with a *combineReducers()* helper function, useful for “splitting” the root reducer into separate functions that each manage one branch of the state tree
+  4.  The Redux store saves the complete state tree returned by the root reducer. This new tree is now the next state of your app! Every listener registered with store.subscribe(listener) will now be invoked; listeners may call store.getState() to get the current state.
 
 ## Usage with React
 - You need react-redux that provides <Provider store/>, connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
