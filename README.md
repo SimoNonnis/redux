@@ -67,6 +67,8 @@
 - All container components need access to the Redux store so they can subscribe to it. One option would be to pass it as a prop to every container component. However it gets tedious, as you have to wire store even through presentational components just because they happen to render a container deep in the component tree
 - The option is to use a special React Redux component called <Provider> to make the store available to all container components in the application without passing it explicitly
 - You only need to use it once when you render the root component
+- *<Provider store>* Makes the Redux store available to the connect() calls in the component hierarchy below. Normally, you can’t use connect() without wrapping the root component in <Provider>
+- *connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])* Connects a React component to a Redux store
 
 
 
