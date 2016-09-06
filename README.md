@@ -79,7 +79,14 @@ Each of these two moments usually require a change in the application state; to 
 2. *An action informing the reducers that the request finished successfully.* The reducers may handle this action by merging the new data into the state they manage and resetting isFetching. The UI would hide the spinner, and display the fetched data
 3. *An action informing the reducers that the request failed.* The reducers may handle this action by resetting isFetching. Additionally, some reducers may want to store the error message so the UI can display it
 
-## Designing the State Shape
+- For dealing with async requests we'll need redux-thunk. Using redux thunk middleware an action creator is able to return a function instead of a plain action object
+- When an action creator returns a function, that function will get executed by the Redux Thunk middleware 
+- This function doesn't need to be pure; it is thus allowed to have side effects, including executing asynchronous API calls
+- Use fetch() and in every file you use it *import fetch from 'isomorphic-fetch'* Internally, it uses whatwg-fetch polyfill on the client, and node-fetch on the server, so you won't need to change API calls if you change your app to be universal
+- Be aware that any fetch polyfill assumes a Promise polyfill is already present. The easiest way to ensure you have a Promise polyfill is to enable Babel's ES6 polyfill in your entry point before any other code runs
+- Do this once before any other code in your app *import 'babel-polyfill'*
+
+### Async Flow
 - 
 
 
