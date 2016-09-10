@@ -18,7 +18,7 @@
 
 ## Reducers
 - You need reducers to specify how the state updates when you dispatch actions
-- Actions describe what happened, but don’t specify how the application’s state changes in response. This is the job of a reducer.
+- Actions describe what happened, but don’t specify how the application’s state changes in response. This is the job of a reducer
 
 ### Designing the State Shape
 - In Redux, all application state is stored as a single object. *It’s a good idea to think of its shape before writing any code*. What’s the minimal representation of your app’s state as an object?
