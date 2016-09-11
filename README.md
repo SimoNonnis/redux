@@ -175,6 +175,16 @@ There should only be a single store in a Redux app, as the composition happens o
 * replaceReducer(nextReducer) can be used to implement hot reloading and code splitting. Most likely you won't use it.
 
 ## API Reference
+The Redux API surface is tiny. This section documents the complete Redux API. Keep in mind that Redux is only concerned with managing the state. In a real app, you'll also want to use UI bindings like react-redux.
+
+### Top-Level Exports
+Every function described above is a top-level export. You can import any of them like this:
+```
+  import { createStore } from 'redux'
+```
+* **createStore(reducer, [preloadedState], [enhancer])**
+  Creates a Redux store that holds the complete state tree of your app.
+  There should only be a single store in your app.
 
 
 
