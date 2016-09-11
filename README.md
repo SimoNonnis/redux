@@ -113,6 +113,9 @@ Each of these two moments usually require a change in the application state; to 
 - We don't have to worry about looking at each place where todos are being added, to make sure they have this check. Action creators let you decouple additional logic around dispatching an action, from the actual components emitting those actions. It's very handy when the application is under heavy development, and the requirements change often
 - The suggested structure for a Redux store is to split the state object into multiple “slices” or “domains” by key, and provide a separate reducer function to manage each individual data slice
 
+## Glossary
+- 
+
 
 
 
