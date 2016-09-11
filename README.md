@@ -154,6 +154,29 @@ Calling an action creator only produces an action, but does not dispatch it. You
 
 If an action creator needs to read the current state, perform an API call, or cause a side effect, like a routing transition, it should return an async action instead of an action.
 
+### Async Action
+An async action is a value that is sent to a dispatching function, but is not yet ready for consumption by the reducer. It will be transformed by middleware into an action (or a series of actions) before being sent to the base dispatch() function. Async actions may have different types, depending on the middleware you use. They are often asynchronous primitives, like a Promise or a thunk, which are not passed to the reducer immediately, but trigger action dispatches once an operation has completed.
+
+### Middleware
+A middleware is a higher-order function that composes a dispatch function to return a new dispatch function. It often turns async actions into actions.
+
+Middleware is composable using function composition. It is useful for logging actions, performing side effects like routing, or turning an asynchronous API call into a series of synchronous actions.
+
+See applyMiddleware(...middlewares) for a detailed look at middleware.
+
+### Store
+A store is an object that holds the application's state tree.
+
+There should only be a single store in a Redux app, as the composition happens on the reducer level.
+
+* dispatch(action) is the base dispatch function described above.
+* getState() returns the current state of the store.
+* subscribe(listener) registers a function to be called on state changes.
+* replaceReducer(nextReducer) can be used to implement hot reloading and code splitting. Most likely you won't use it.
+
+## API Reference
+
+
 
 
 
