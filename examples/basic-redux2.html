@@ -9,11 +9,12 @@
 
 
     <script>
+
       // REDUCERS <==========================================
       const userReducer = function (state = {}, action) {
         switch (action.type) {
           case 'ADD_USER':
-            return Object.assign({}, state, action.payload)
+            return state = Object.assign({}, state, {name: action.payload} )
           default:
             return state
         }
@@ -36,7 +37,7 @@
       store.subscribe(() => console.log('Store changed to value: ', store.getState()))
 
       console.log('Initial store state: ', store.getState());
-      store.dispatch({ type: 'ADD_USER', payload: { name: 'Simon'} });
+      store.dispatch({ type: 'ADD_USER', payload: 'Simon' });
 
 
     </script>
