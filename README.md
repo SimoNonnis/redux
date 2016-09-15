@@ -186,14 +186,33 @@ Every function described above is a top-level export. You can import any of them
   Creates a Redux store that holds the complete state tree of your app.
   There should only be a single store in your app.
   
-  **Arguments**
+**Arguments**
   1. reducer (Function): A reducing function that returns the next state tree, given the current state tree and an action to handle.
   2. [preloadedState] (any): The initial state. You may optionally specify it to hydrate the state from the server in universal apps, or to restore a previously serialized user session. If you produced reducer with combineReducers, this must be a plain object with the same shape as the keys passed to it. Otherwise, you are free to pass anything that your reducer can understand.
   3. [enhancer] (Function): The store enhancer. You may optionally specify it to enhance the store with third-party capabilities such as middleware, time travel, persistence, etc. The only store enhancer that ships with Redux is applyMiddleware().
 
-  **Returns**
+**Returns**
   
-  (Store): An object that holds the complete state of your app. The only way to change its state is by dispatching actions. You may also subscribe to the changes to its state to update the UI.
+(Store): An object that holds the complete state of your app. The only way to change its state is by dispatching actions. You may also subscribe to the changes to its state to update the UI.
+
+**Tips**
+
+* Don't create more than one store in an application! Instead, use combineReducers to create a single root reducer out of many
+* If your state is a plain object, make sure you never mutate it! For example, instead of returning something like Object.assign(state, newData) from your reducers, return Object.assign({}, state, newData). This way you don't override the previous state. You can also write return { ...state, ...newData } if you enable the object spread operator proposal
+
+####Store
+
+A store holds the whole state tree of your application.
+The only way to change the state inside it is to dispatch an action on it.
+A store is not a class. It's just an object with a few methods on it.
+To create it, pass your root reducing function to createStore.
+
+**Store Methods**
+
+* getState()
+* dispatch(action)
+* subscribe(listener)
+* replaceReducer(nextReducer)
 
 
 
