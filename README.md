@@ -182,7 +182,7 @@ Every function described above is a top-level export. You can import any of them
 ```
   import { createStore } from 'redux'
 ```
-#### **createStore(reducer, [preloadedState], [enhancer])**
+#### createStore(reducer, [preloadedState], [enhancer])
   Creates a Redux store that holds the complete state tree of your app.
   There should only be a single store in your app.
   
@@ -200,7 +200,7 @@ Every function described above is a top-level export. You can import any of them
 * Don't create more than one store in an application! Instead, use combineReducers to create a single root reducer out of many
 * If your state is a plain object, make sure you never mutate it! For example, instead of returning something like Object.assign(state, newData) from your reducers, return Object.assign({}, state, newData). This way you don't override the previous state. You can also write return { ...state, ...newData } if you enable the object spread operator proposal
 
-####Store
+#### Store
 
 A store holds the whole state tree of your application.
 The only way to change the state inside it is to dispatch an action on it.
@@ -209,10 +209,51 @@ To create it, pass your root reducing function to createStore.
 
 **Store Methods**
 
-* getState()
-* dispatch(action)
-* subscribe(listener)
-* replaceReducer(nextReducer)
+* **getState()**. Returns the current state of the app
+* **dispatch(action)**. Dispatches an action. This is the only way to trigger a state change. The reducers function and the action will be called.  Its return value will be considered the next state 
+* **subscribe(listener)**. Adds a change listener. It will be called any time an action is dispatched. Listener is called any time an action has been dispatched.
+* **replaceReducer(nextReducer)**. Replaces the reducer currently used by the store to calculate the state. It is an advanced API. You might need this if your app implements code splitting, and you want to load some of the reducers dynamically. You might also need this if you implement a hot reloading mechanism for Redux.
+
+#### combineReducers(reducers)
+
+The combineReducers helper function turns an object whose values are different reducing functions into a single reducing function you can pass to createStore.
+
+The resulting reducer calls every child reducer, and gathers their results into a single state object.
+
+You can control state key names by using different keys for the reducers in the passed object. For example, you may call combineReducers({ todos: myTodosReducer, counter: myCounterReducer }) for the state shape to be { todos, counter }.
+
+A popular convention is to name reducers after the state slices they manage, so you can use ES6 property shorthand notation: combineReducers({ counter, todos }). This is equivalent to writing combineReducers({ counter: counter, todos: todos }).
+
+It returns a reducer that invokes every reducer inside the reducers object, and constructs a state object with the same shape.
+
+Any reducer passed to combineReducers must satisfy these rules:
+
+* it must return the state given to it as the first argument.
+* It must never return undefined. It is too easy to do this by mistake via an early return statement, so combineReducers throws if you do that instead of letting the error manifest itself somewhere else.
+
+You may call combineReducers at any level of the reducer hierarchy. It doesn't have to happen at the top. In fact you may use it again to split the child reducers that get too complicated into independent grandchildren, and so on.
+
+#### applyMiddleware(...middlewares)
+
+Middleware is the suggested way to extend Redux with custom functionality.
+
+The key feature of middleware is that it is composable. Multiple middleware can be combined together, where each middleware requires no knowledge of what comes before or after it in the chain.
+
+The most common use case for middleware is to support asynchronous actions without much boilerplate code or a dependency on a library like Rx. It does so by letting you dispatch async actions in addition to normal actions.
+
+For example, redux-thunk lets the action creators invert control by dispatching functions. They would receive dispatch as an argument and may call it asynchronously. Such functions are called thunks. 
+
+Middleware is not baked into createStore and is not a fundamental part of the Redux architecture, but we consider it useful enough to be supported right in the core. This way, there is a single standard way to extend dispatch in the ecosystem, and different middleware may compete in expressiveness and utility.
+
+Each middleware receives Store's dispatch and getState functions as named arguments, and returns a function. That function will be given the next middleware's dispatch method, and is expected to return a function of action calling next(action) with a potentially different argument, or at a different time, or maybe not calling it at all. The last middleware in the chain will receive the real store's dispatch method as the next parameter, thus ending the chain. So, the middleware signature is ({ getState, dispatch }) => next => action.
+
+
+
+
+
+
+
+
 
 
 
