@@ -247,6 +247,32 @@ Middleware is not baked into createStore and is not a fundamental part of the Re
 
 Each middleware receives Store's dispatch and getState functions as named arguments, and returns a function. That function will be given the next middleware's dispatch method, and is expected to return a function of action calling next(action) with a potentially different argument, or at a different time, or maybe not calling it at all. The last middleware in the chain will receive the real store's dispatch method as the next parameter, thus ending the chain. So, the middleware signature is ({ getState, dispatch }) => next => action.
 
+applyMiddleware is an example of the most powerful Redux extension mechanism called store enhancers. It is highly unlikely you'll ever want to write a store enhancer yourself. Another example of a store enhancer is redux-devtools. Middleware is less powerful than a store enhancer, but it is easier to write.
+
+Middleware sounds much more complicated than it really is. The only way to really understand middleware is to see how the existing middleware works, and try to write your own. The function nesting can be intimidating, but most of the middleware you'll find are, in fact, 10-liners, and the nesting and composability is what makes the middleware system powerful.
+
+#### bindActionCreators(actionCreators, dispatch)
+
+Turns an object whose values are action creators, into an object with the same keys, but with every action creator wrapped into a dispatch call so they may be invoked directly.
+
+The only use case for bindActionCreators is when you want to pass some action creators down to a component that isn't aware of Redux, and you don't want to pass dispatch or the Redux store to it.
+
+#### compose(...functions)
+
+Composes functions from right to left. 
+Example:
+```` 
+const store = createStore(
+  reducer,
+  compose(
+    applyMiddleware(thunk),
+    DevTools.instrument()
+  )
+)
+````
+
+
+
 
 
 
