@@ -70,4 +70,5 @@ const store = createStore(rootReducer, middleware);
 store.dispatch({
   type: 'FETCH_USERS',
   payload: fetch('http://jsonplaceholder.typicode.com/users')
+    .then((response) => response.json())
 })
