@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Redux Example-3</title>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+  </head>
+  <body>
+
+
+
+    <script>
+
+      // REDUCERS <==========================================
+      const userReducer = function (state = {}, action) {
+        switch (action.type) {
+          case 'ADD_USER':
+            return state = Object.assign({}, state, {name: action.payload} )
+          default:
+            return state
+        }
+      };
+
+      const postsReducer = function (state = [], action) {
+        return state;
+      };
+
+      const rootReducer = Redux.combineReducers({
+        user: userReducer,
+        posts: postsReducer
+      });
+      // ====================================================
+
+      // MIDDLEWARE <==========================================
+      const logger = (state) => (next) => (action) => {
+        console.log('Action fired: ', action.type);
+        next(action)
+      };
+
+      const middleware = Redux.applyMiddleware(logger);
+
+      // ====================================================
+
+      // STORE INIT <==========================================
+      const store = Redux.createStore(rootReducer, middleware);
+      // ====================================================
+
+      store.subscribe(() => console.log('Store changed to value: ', store.getState()))
+
+      console.log('Initial store state: ', store.getState());
+      store.dispatch({ type: 'ADD_USER', payload: 'Simon' });
+
+
+    </script>
+  </body>
+</html>
