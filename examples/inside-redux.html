@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>redux-inside</title>
+  <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+</head>
+<body>
+  <div>
+    <h1>Count <span id='countValue'></span></h1>
+    <div>
+      <button id='incrementBtn' >+</button>
+      <button id='decrementBtn' >-</button>
+    </div>
+  </div>
+
+
+<script>
+  // from DOM
+  const countValue = document.getElementById('countValue');
+  const incrementBtn = document.getElementById('incrementBtn');
+  const decrementBtn = document.getElementById('decrementBtn');
+
+  // actions
+  const INCREMENT = 'INCREMENT';
+  const DECREMENT = 'DECREMENT';
+
+  // action creatores
+  function increment () {
+    return {
+      type: INCREMENT
+    }
+  }
+
+  function decrement () {
+    return {
+      type: DECREMENT
+    }
+  }
+
+  // reducer
+  function appReducer(state = 0, action) {
+    switch (action.type) {
+      case INCREMENT:
+        return state += 1
+        case DECREMENT:
+          return state -= 1
+      default:
+        return state
+    }
+  }
+
+  // store
+  let store = Redux.createStore(appReducer);
+
+  // render
+  function render () {
+    countValue.innerHTML = store.getState()
+  }
+  render();
+
+  store.subscribe(render)
+
+  // click handlers
+  incrementBtn.addEventListener('click', () => store.dispatch(increment()))
+  decrementBtn.addEventListener('click', () => store.dispatch(decrement()))
+
+
+
+
+
+</script>
+</body>
+</html>
